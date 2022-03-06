@@ -32,16 +32,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .background-image-container {
   position: relative;
-  min-height: 105%;
+  min-height: 102%;
   font-family: "Mali", cursive;
 }
 
 .background-image {
-  height: 105%;
+  height: 102%;
   object-fit: contain;
 }
 
