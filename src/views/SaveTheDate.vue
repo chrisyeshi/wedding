@@ -120,6 +120,6 @@
 }
 
 .wedding-date {
-  font-size: 24pt;
+  font-size: 21pt;
 }
 </style>
