@@ -27,22 +27,32 @@
 
     computed: {
       message() {
-        if (this.language === 'zh') {
-          return {
-            paula: '張寶方',
-            chris: '葉鬱蔥',
-            wedding: '婚禮',
-            invitation: '晚些發出正式邀請',
-            date: '22年9月24日週六'
-          }
-        }
-        return {
+        let msg = {
           paula: 'Paula',
           chris: 'Chris',
           wedding: 'Wedding',
           invitation: 'Invitation to follow',
           date: '09.24.2022 (Sat)'
         }
+        if (this.language === 'zh') {
+          return {
+            ...msg,
+            paula: 'Paula',
+            chris: 'Chris',
+            wedding: '婚禮',
+            invitation: '敬請期待',
+            date: '09.24.2022 (週六)'
+          }
+        }
+        if (this.language === 'zh-yue') {
+          return {
+            ...msg,
+            wedding: '婚禮',
+            invitation: '遲些發請帖',
+            date: '09.24.2022 (週六)'
+          }
+        }
+        return msg;
       }
     }
   }
@@ -59,14 +69,13 @@
   bottom: 0;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .background-image-container {
   position: relative;
-  min-height: 102%;
+  height: 102%;
   font-family: "Mali", cursive;
 }
 
@@ -103,6 +112,7 @@
   font-size: 50pt;
   position: fixed;
   top: 10vh;
+  padding: 5px;
 }
 
 .wedding-info {
