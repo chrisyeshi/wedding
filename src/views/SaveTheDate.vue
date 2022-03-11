@@ -90,16 +90,16 @@
   left: 41%;
   color: white;
   font-size: 18pt;
-  transform: rotate(10deg);
+  /*transform: rotate(10deg);*/
 }
 
 .chris-name {
   position: absolute;
   top: 25%;
-  left: 53%;
+  left: 55%;
   color: white;
   font-size: 18pt;
-  transform: rotate(-15deg);
+  /*transform: rotate(-15deg);*/
 }
 
 .content {

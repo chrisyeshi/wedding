@@ -12,6 +12,8 @@ node_modules
 dist
 dist-ssr
 coverage
+photos
+photos-next
 *.local
 
 /cypress/videos/
