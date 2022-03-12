@@ -6,10 +6,11 @@
     "build": "vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "convert": "convert -monitor ./photos/*.* -set filename:base \"%[basename]\" -resize 2000x2000\\> ./public/photos/%[filename:base].jpg"
+    "convert": "convert -monitor ./photos/*.* -set filename:base \"%[basename]\" -resize 2000x2000\\> ./src/assets/photos/%[filename:base].jpg"
   },
   "dependencies": {
     "vue": "^3.2.31",
+    "vue-easy-lightbox": "^1.4.1",
     "vue-i18n": "^9.1.9",
     "vue-meta": "^3.0.0-alpha.2",
     "vue-router": "^4.0.12",

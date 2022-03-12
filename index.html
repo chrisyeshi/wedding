@@ -14,5 +14,23 @@
   <body style="margin: 0;">
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <style>
+      #app {
+        display: flex;
+        justify-content: center;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #202020;
+        }
+      }
+
+      @media (prefers-color-scheme: light) {
+        body {
+          background-color: WhiteSmoke;
+        }
+      }
+    </style>
   </body>
 </html>
