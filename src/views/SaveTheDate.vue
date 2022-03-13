@@ -65,11 +65,15 @@
   position: fixed;
   top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .background-image-container {
@@ -110,6 +114,13 @@
   position: fixed;
   top: 10vh;
   padding: 5px;
+  white-space: nowrap;
+}
+
+@media (max-width: 350px) {
+  .save-the-date {
+    font-size: 45pt;
+  }
 }
 
 .wedding-info {
