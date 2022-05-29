@@ -1,19 +1,25 @@
 <template>
-  <div class="gallery">
-    <div class="image-container"
-        :class="{ selected: photo.mode === 'selected' }"
-        v-for="(photo, iPhoto) in photos" :key="photo">
-      <img class="image" v-lazy="photo" @click="select(photo, iPhoto)">
+  <div class="gallery-container">
+    <div class="header">
+      <a href="/rsvp" class="icon material-symbols-rounded">arrow_back</a>
+      <div class="header-title">Gallery</div>
     </div>
-    <vue-easy-lightbox
-      scrollDisabled
-      escDisabled
-      moveDisabled
-      :visible="isLightboxVisible"
-      :imgs="photos"
-      :index="iPhoto"
-      @hide="hideLightbox"
-    ></vue-easy-lightbox>
+    <div class="gallery">
+      <div class="image-container"
+          :class="{ selected: photo.mode === 'selected' }"
+          v-for="(photo, iPhoto) in photos" :key="photo">
+        <img class="image" v-lazy="photo" @click="select(photo, iPhoto)">
+      </div>
+      <vue-easy-lightbox
+        scrollDisabled
+        escDisabled
+        moveDisabled
+        :visible="isLightboxVisible"
+        :imgs="photos"
+        :index="iPhoto"
+        @hide="hideLightbox"
+      ></vue-easy-lightbox>
+    </div>
   </div>
 </template>
 
@@ -49,16 +55,44 @@
   }
 </script>
 
-<style>
-:root {
+<style scoped>
+.gallery-container {
   --spacing: 8pt;
+  padding: var(--spacing);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-container > .header {
+  font-size: 18pt;
+  line-height: 36pt;
+  position: relative;
+  height: 36pt;
+  max-height: 36pt;
+  min-height: 36pt;
+  margin-bottom: 8px;
+}
+
+.gallery-container > .header > .icon {
+  position: absolute;
+  left: 4pt;
+  top: 8pt;
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.gallery-container > .header > .header-title {
+  text-align: center;
+  font-family: "Great Vibes", cursive;
 }
 
 .gallery {
+  --spacing: 8pt;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: var(--spacing);
-  padding: var(--spacing);
   max-width: 1440px;
 }
 
@@ -66,6 +100,7 @@
   border-radius: var(--spacing);
   position: relative;
   width: calc(50% - var(--spacing) / 2);
+  max-width: 200px;
   box-shadow: 0 0 4pt rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }

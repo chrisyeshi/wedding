@@ -6,9 +6,12 @@
     "build": "vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "convert": "convert -monitor ./photos/*.* -set filename:base \"%[basename]\" -resize 2000x2000\\> ./src/assets/photos/%[filename:base].jpg"
+    "convert": "convert -monitor ./photos/*.* -set filename:base \"%[basename]\" -resize 2000x2000\\> ./src/assets/photos/%[filename:base].jpg",
+    "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
+    "firebase": "^9.6.10",
+    "g-sheets-api": "^2.1.2",
     "vue": "^3.2.31",
     "vue-easy-lightbox": "^1.4.1",
     "vue-i18n": "^9.1.9",

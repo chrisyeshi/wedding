@@ -58,7 +58,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mali:wght@400&family=Roboto:wght@100&display=swap");
 
 .fullscreen {
