@@ -1,7 +1,7 @@
 <template>
   <div class="gallery-container">
     <div class="header">
-      <a href="/rsvp" class="icon material-symbols-rounded">arrow_back</a>
+      <a :href="`/?guest=${this.guestKey}&language=${language}`" class="icon material-symbols-rounded">arrow_back</a>
       <div class="header-title">Gallery</div>
     </div>
     <div class="gallery">
@@ -31,6 +31,16 @@
     components: {
       VueEasyLightbox
     },
+    props: {
+      guestKey: {
+        type: String,
+        default: ''
+      },
+      language: {
+        type: String,
+        default: 'en'
+      }
+    },
     data () {
       return {
         photos: [],
@@ -59,7 +69,6 @@
 .gallery-container {
   --spacing: 8pt;
   padding: var(--spacing);
-  color: white;
   display: flex;
   flex-direction: column;
 }
@@ -84,7 +93,7 @@
 
 .gallery-container > .header > .header-title {
   text-align: center;
-  font-family: "Great Vibes", cursive;
+  font-family: "Dancing Script", cursive;
 }
 
 .gallery {
@@ -124,5 +133,25 @@
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gallery-container {
+    color: white;
+  }
+
+  .gallery-container > .header > .icon {
+    color: white !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .gallery-container {
+    color: #202020;
+  }
+
+  .gallery-container > .header > .icon {
+    color: #202020 !important;
+  }
 }
 </style>

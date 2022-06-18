@@ -3,17 +3,18 @@
     <section class="section invite">
       <div class="background-container">
         <img class="background-image" src="/236A7258_center_flip.jpg" />
-        <div class="chris-name">Chris</div>
-        <div class="paula-name">Paula</div>
       </div>
       <div class="greeting">
-        <div class="hey">{{ hey }}</div>
-        <div class="join">Please join us.</div>
+        <div class="section-title">{{ message.invite }}</div>
+        <div class="hey">{{ message.hey }}</div>
       </div>
       <div class="quick-fact">
-        <div>Wedding</div>
-        <div>09.24.2022 (Sat)</div>
-        <div>Ardenwood Farm, Newark, CA</div>
+        <div>{{ message.quickWedding }}</div>
+        <div>{{ message.quickDate }}</div>
+        <div>{{ message.quickLocation }}</div>
+        <div class="rsvp-shortcut" @click="scrollToRsvp">
+          {{ message.quickRSVP }}
+        </div>
     </div>
     </section>
     <section class="section location">
@@ -22,42 +23,55 @@
         <div class="icon material-symbols-rounded">open_in_new</div>  
       </div>
       <div class="info">
-        <div class="label">Location</div>
+        <div class="section-title">{{ message.locationTitle }}</div>
         <div class="link" @click="onClickMap">
-          <div class="name">Ardenwood Historic Farm</div>
-          <div class="street">34600 Ardenwood Blvd.</div>
-          <div class="city">Fremont, CA 94555</div>
+          <div class="name">{{ message.locationName }}</div>
+          <div class="street">{{ message.locationStreet }}</div>
+          <div class="city">{{ message.locationCity }}</div>
         </div>
       </div>
     </section>
     <section class="section schedule">
       <div class="info">
-        <div class="label">Schedule</div>
-        <div class="time">5:00 PM</div><div>Entry & Champaigne</div>
-        <div class="time">5:30 PM</div><div>Do You & I Do</div>
-        <div class="time">6:00 PM</div><div>Cocktail Hour & Bar Opens</div>
-        <div class="time">7:00 PM</div><div>Reception Begins</div>
-        <div class="time">10:00 PM</div><div>Reception Ends & Bar Closes</div>
+        <div class="section-title">{{ message.scheduleTitle }}</div>
+        <div class="time">{{ message.scheduleEntryTime }}</div>
+        <div>{{ message.scheduleEntryName }}</div>
+        <div class="time">{{ message.scheduleCeremonyTime }}</div>
+        <div>{{ message.scheduleCeremonyName }}</div>
+        <div class="time">{{ message.scheduleBarOpenTime }}</div>
+        <div>{{ message.scheduleBarOpenName }}</div>
+        <div class="time">{{ message.scheduleReceptionTime }}</div>
+        <div>{{ message.scheduleReceptionName }}</div>
+        <div class="time">{{ message.scheduleBarCloseTime }}</div>
+        <div>{{ message.scheduleBarCloseName }}</div>
       </div>
     </section>
     <section class="section photos">
-      <div class="label">Photos</div>
+      <div class="section-title">{{ message.photoTitle }}</div>
       <div class="photos-container">
         <a class="image-container" href="/gallery"
           v-for="(photo, iPhoto) in photoPaths" :key="photo">
           <img class="image" v-lazy="photo">
         </a>
       </div>
-      <a class="more" href="/gallery">More</a>
+      <a class="more" :href="`/gallery?guest=${this.guestKey}&language=${this.language}`">
+        {{ message.photoMore }}
+      </a>
     </section>
-    <section class="section rsvp">
+    <section class="section rsvp" ref="rsvp">
       <form class="rsvp-form" @submit.prevent="onSubmit">
-        <label class="title">RSVP</label>
-        <label class="label" for="name">Name</label>
-        <input type="text" id="name" name="name" v-model="guestForm.name">
-        <label class="label" for="email">Email</label>
-        <input type="text" id="email" name="email" v-model="guestForm.email">
-        <label class="label" for="attend">Attend</label>
+        <label class="section-title">{{ message.rsvpTitle }}</label>
+        <label class="label" for="name">{{ message.rsvpNameLabel }}</label>
+        <input
+          type="text" id="name" name="name"
+          :placeholder="message.rsvpNamePlaceholder"
+          v-model="guestForm.name">
+        <label class="label" for="email">{{ message.rsvpEmailLabel }}</label>
+        <input
+          type="email" id="email" name="email"
+          :placeholder="message.rsvpEmailPlaceholder"
+          v-model="guestForm.email">
+        <label class="label" for="attend">{{ message.rsvpAttendLabel }}</label>
         <div class="can-toggle">
           <input
             type="checkbox" id="attend" name="attend" checked
@@ -68,20 +82,26 @@
               data-unchecked="No"></div>
           </label>
         </div>
-        <!-- <input
-          type="checkbox" id="attend" name="attend" checked
-          v-model="guestForm.attend"> -->
-        <label class="label" for="adult-count">Adult #</label>
+        <label class="label" for="adult-count">
+          {{ message.rsvpAdultCountLabel }}
+        </label>
         <input
           type="number" id="adult-count" name="adult-count"
+          :placeholder="message.rsvpAdultCountPlaceholder"
           v-model="guestForm.adultCount">
-        <label class="label" for="kid-count">Kid #</label>
+        <label class="label" for="kid-count">
+          {{ message.rsvpKidCountLabel }}
+        </label>
         <input
           type="number" id="kid-count" name="kid-count"
+          :placeholder="message.rsvpKidCountPlaceholder"
           v-model="guestForm.kidCount">
-        <label class="label" for="notes">Notes</label>
-        <textarea id="notes" name="notes" rows=8 placeholder="Vegan, vegetarian, high chair?" v-model="guestForm.notes"></textarea>
-        <input class="submit" type="submit" value="Submit">
+        <label class="label" for="notes">{{ message.rsvpNoteLabel }}</label>
+        <textarea id="notes" name="notes" rows=8
+          :placeholder="message.rsvpNotePlaceholder"
+          v-model="guestForm.notes"></textarea>
+        <input class="submit" type="submit" :value="message.rsvpSubmit">
+        <!-- <a class="faq" href="#">FAQ</a> -->
       </form>
     </section>
   </div>
@@ -135,8 +155,83 @@ export default {
   },
 
   computed: {
-    hey() {
-      return this.guest ? `Hey, ${this.guest.name}!` : `Hey!`;
+    message() {
+      let msg = {
+        invite: 'Invitation',
+        hey: this.guest ? `to ${this.guest.name}` : '',
+        quickWedding: 'Paula & Chris Wedding',
+        quickDate: '09.24.2022 (Sat)',
+        quickLocation: 'Ardenwood Farm, Newark, CA',
+        quickRSVP: 'RSVP by 08.01',
+        locationTitle: 'Location',
+        locationName: 'Ardenwood Historic Farm',
+        locationStreet: '34600 Ardenwood Blvd.',
+        locationCity: 'Fremond, CA 94555',
+        scheduleTitle: 'Schedule',
+        scheduleEntryTime: '5:00 PM',
+        scheduleEntryName: 'Entry & Champaign',
+        scheduleCeremonyTime: '5:30 PM',
+        scheduleCeremonyName: 'Ceremony',
+        scheduleBarOpenTime: '6:00 PM',
+        scheduleBarOpenName: 'Cocktail Hour & Bar Opens',
+        scheduleReceptionTime: '7:00 PM',
+        scheduleReceptionName: 'Reception Begins',
+        scheduleBarCloseTime: '10:00 PM',
+        scheduleBarCloseName: 'Reception Ends & Bar Closes',
+        photoTitle: 'Photos',
+        photoMore: 'More',
+        rsvpTitle: 'R S V P',
+        rsvpNameLabel: 'Name',
+        rsvpNamePlaceholder: 'Your Name',
+        rsvpEmailLabel: 'Email',
+        rsvpEmailPlaceholder: 'this@that.com',
+        rsvpAttendLabel: 'Attend',
+        rsvpAdultCountLabel: 'Adult #',
+        rsvpAdultCountPlaceholder: 'How many adults?',
+        rsvpKidCountLabel: 'Kid #',
+        rsvpKidCountPlaceholder: 'How many kids (under 12)?',
+        rsvpNoteLabel: 'Notes',
+        rsvpNotePlaceholder: 'Vegan, vegetarian, high chair?',
+        rsvpSubmit: 'Submit'
+      }
+      if (this.language === 'zh') {
+        return {
+          ...msg,
+          invite: '婚禮請帖',
+          quickWedding: 'Paula & Chris 的婚禮',
+          quickDate: '09.24.2022 (週六)',
+          quickLocation: 'Ardenwood Farm, Newark, CA',
+          quickRSVP: '請於 08.01 前回覆',
+          locationTitle: '地點',
+          scheduleTitle: '日程',
+          scheduleEntryName: '賓客進場 & 享用香檳',
+          scheduleCeremonyName: '結婚儀式',
+          scheduleBarOpenName: '雞尾酒時間 & 吧台開張',
+          scheduleReceptionName: '婚宴開始',
+          scheduleBarCloseName: '婚宴結束 & 吧台關閉',
+          photoTitle: '我們的一些照片',
+          photoMore: '更多',
+          rsvpTitle: '敬請回覆',
+          rsvpNameLabel: '名字',
+          rsvpNamePlaceholder: '您的名字',
+          rsvpEmailLabel: '電子郵件',
+          rsvpEmailPlaceholder: 'this@that.com',
+          rsvpAttendLabel: '是否參加',
+          rsvpAdultCountLabel: '大人數',
+          rsvpAdultCountPlaceholder: '有多少大人？',
+          rsvpKidCountLabel: '小孩數',
+          rsvpKidCountPlaceholder: '有多少小孩（12 歲以上）？',
+          rsvpNoteLabel: '留言',
+          rsvpNotePlaceholder: '需要高腳椅？需要素食？',
+          rsvpSubmit: '確認'
+        }
+      }
+      if (this.language === 'zh-yue') {
+        return {
+          ...msg
+        }
+      }
+      return msg
     }
   },
 
@@ -148,22 +243,25 @@ export default {
     }
     GSheetReader(options, rows => {
       this.guest = rows.find(row => row.key === this.guestKey);
+      this.guestForm = {
+        ...this.guestForm,
+        ...this.guest
+      }
     }).catch(err => {
       console.error(err);
     });
     const globs = import.meta.glob('../assets/photos/*.jpg');
     const modules = await Promise.all(Object.values(globs).map(f => f()));
-    this.photoPaths = modules.map(m => m.default).slice(0, 6);
+    this.photoPaths = modules.map(m => m.default).slice(0, 4);
   },
 
   methods: {
-    onSubmit(event) {
-      this.validate();
-      this.submit();
+    scrollToRsvp() {
+      this.$refs.rsvp.scrollIntoView({behavior: 'smooth'});
     },
 
-    validate() {
-
+    onSubmit(event) {
+      this.submit();
     },
 
     async submit() {
@@ -177,7 +275,7 @@ export default {
         if (!res.ok) {
           throw new Error(res.statusText);
         }
-        alert(this.guestForm);
+        alert(`Thank you for your RSVP, ${this.guestForm.name}`);
       } catch(error) {
         alert(error);
       }
@@ -197,31 +295,38 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mali:wght@400&family=Roboto:wght@100&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Mali:wght@400&family=Moon+Dance&family=Overlock&family=Sniglet&family=Tillana&family=Waterfall&display=swap');
 
 .container {
   height: 100vh;
   width: 100vw;
-  max-width: 1440px;
+  max-width: 800px;
   overflow-x: hidden;
   overflow-y: scroll;
-  scroll-snap-type: y proximity;
+  /*scroll-snap-type: y proximity;*/
   font-family: "Mali", cursive;
 }
 
 .section {
-  height: 90vh;
+  height: 750px;
   scroll-snap-align: start;
   overflow: hidden;
 }
 
+.section-title {
+  justify-self: center;
+  font-family: "Dancing Script", cursive;
+  font-size: 48pt;
+  line-height: 48pt;
+}
+
 .invite {
-  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   color: white;
+  background-color: #202020;
 }
 
 .invite .background-container {
@@ -240,6 +345,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.invite > .greeting > .section-title {
+  line-height: 56pt;
+}
+
+.invite > .greeting > .hey {
+  font-size: 16pt;
 }
 
 .invite > .background-container > .paula-name {
@@ -272,14 +385,46 @@ export default {
   padding: 8pt;
 }
 
+.invite > .quick-fact > .rsvp-shortcut {
+  text-decoration: underline;
+}
+
 .location {
-  background: #3A4A51;
+  /*background: #3A4A51;*/
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 36px;
   align-items: center;
+  position: relative;
+}
+
+.location:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("/paper_texture.jpg");
+  background-position: center;
+  background-size: cover;
+  filter: grayscale();
+  z-index: -2;
+}
+
+.location:after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /*background: #3A4A51;*/
+  background: #cb8566;
+  opacity: 0.75;
+  z-index: -1;
 }
 
 .location > .map {
@@ -306,10 +451,12 @@ export default {
   flex-direction: column;
   align-items: center;
   line-height: 24px;
+  color: #4b1200;
 }
 
-.location > .info > .label {
-  line-height: 36px;
+.location > .info > .section-title {
+  font-size: 28pt;
+  line-height: 42pt;
 }
 
 .location > .info > .link {
@@ -323,8 +470,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #6b3e2e;
+  /*background: #794524;*/
+  background: #3A4A51;
   color: white;
+  position: relative;
 }
 
 .schedule > .info {
@@ -334,12 +483,11 @@ export default {
   gap: 36px;
 }
 
-.schedule > .info > .label {
+.schedule > .info > .section-title {
   grid-column-start: 1;
   grid-column-end: 3;
   justify-self: center;
-  font-family: "Great Vibes", cursive;
-  font-size: 48pt;
+  font-size: 36pt;
 }
 
 .schedule > .info > .time {
@@ -353,13 +501,13 @@ export default {
   justify-content: center;
   position: relative;
   color: white;
-  background: darkslategray;
+  /*background: darkslategray;*/
+  background: #8A4931;
   gap: 8pt;
 }
 
-.photos > .label {
+.photos > .section-title {
   text-align: center;
-  font-family: "Great Vibes", cursive;
   font-size: 28pt;
 }
 
@@ -402,10 +550,11 @@ export default {
 .photos > .more {
   text-align: center;
   font-size: 14pt;
+  color: white !important;
 }
 
 .photos > .more:visited {
-  color: white;
+  color: white !important;
 }
 
 .rsvp {
@@ -424,11 +573,10 @@ export default {
   gap: 24px;
 }
 
-.rsvp-form > .title {
+.rsvp-form > .section-title {
   grid-column-start: 1;
   grid-column-end: 3;
   justify-self: center;
-  /*font-family: "Great Vibes", cursive;*/
   font-size: 24pt;
 }
 
@@ -442,6 +590,13 @@ export default {
   justify-self: center;
 }
 
+.rsvp-form > .faq {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+  color: white !important;
+}
+
 input, textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -451,6 +606,7 @@ input, textarea {
   border-style: solid;
   border-radius: 8px;
   border-color: silver;
+  border-width: 1px;
   font-family: "Mali", cursive;
   font-size: 12pt;
   padding: 12px;
@@ -458,10 +614,23 @@ input, textarea {
   min-width: 0px;
 }
 
+input[type=email]:invalid {
+  border-color: tomato;
+}
+
 input[type=text] {
 }
 
 input[type=number] {
+}
+
+input[type=submit] {
+  background: #3a3a3a;
+  width: 256px;
+}
+
+.rsvp-form > textarea {
+  resize: none;
 }
 
 .can-toggle {
@@ -595,34 +764,5 @@ input[type=number] {
 }
 .can-toggle label .can-toggle__switch:hover:after {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
-}
-
-/*input[type=checkbox] {
-  width: 36px;
-  height: 36px;
-  position: relative;
-  margin: 0;
-}
-
-input[type=checkbox]:checked {
-  background: #6b3e2e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-input[type=checkbox]:checked:before {
-  content: '\2713';
-  color: white;
-  font-size: 36px;
-}*/
-
-input[type=submit] {
-  background: #3a3a3a;
-  width: 256px;
-}
-
-.rsvp-form > textarea {
-  resize: none;
 }
 </style>
