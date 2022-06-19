@@ -4,9 +4,9 @@
       <a :href="`/?guest=${this.guestKey}&language=${language}`" class="icon material-symbols-rounded">arrow_back</a>
       <div class="header-title">F A Q</div>
     </div>
-    <div v-for="(entry, iEntry) in this.entries" :key="iEntry">
-      <div>{{ entry.question }}</div>
-      <div>{{ entry.answer }}</div>
+    <div class="entry" v-for="(entry, iEntry) in this.entries" :key="iEntry">
+      <div class="question">{{ entry.question }}</div>
+      <div class="answer">{{ entry.answer }}</div>
     </div>
   </div>
 </template>
@@ -33,10 +33,12 @@ export default {
   },
 
   async created () {
+    const lang = this.language || 'en'
+    const sheetName = `faq_${lang}`
     const options = {
       apiKey: 'AIzaSyCe4Q52Hmqrcr8sGGN5TZ0miP6IpRY9ulo',
       sheetId: '14BiEbQ8HBIf4OjoNlxoblmomIAGodDncW99uq11r_Qg',
-      sheetName: 'faq',
+      sheetName: sheetName
     }
     GSheetReader(options, rows => {
       this.entries = rows
@@ -53,6 +55,8 @@ export default {
   padding: var(--spacing);
   display: flex;
   flex-direction: column;
+  width: 100%;
+  font-family: "Mali", cursive;
 }
 
 .faq-container > .header {
@@ -76,6 +80,20 @@ export default {
 .faq-container > .header > .header-title {
   text-align: center;
   font-family: "Dancing Script", cursive;
+}
+
+.faq-container .entry {
+  margin-bottom: 36px;
+}
+
+.faq-container .question {
+  font-size: 16pt;
+  line-height: 36pt;
+}
+
+.faq-container .answer {
+  font-size: 14pt;
+  line-height: 24pt;
 }
 
 @media (prefers-color-scheme: dark) {

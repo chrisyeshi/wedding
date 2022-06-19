@@ -101,7 +101,10 @@
           :placeholder="message.rsvpNotePlaceholder"
           v-model="guestForm.notes"></textarea>
         <input class="submit" type="submit" :value="message.rsvpSubmit">
-        <!-- <a class="faq" href="#">FAQ</a> -->
+        <a class="faq"
+          :href="`/faq?guest=${this.guestKey}&language=${this.language}`">
+          {{ message.faq }}
+        </a>
       </form>
     </section>
   </div>
@@ -192,7 +195,8 @@ export default {
         rsvpKidCountPlaceholder: 'How many kids (under 12)?',
         rsvpNoteLabel: 'Notes',
         rsvpNotePlaceholder: 'Vegan, vegetarian, high chair?',
-        rsvpSubmit: 'Submit'
+        rsvpSubmit: 'Submit',
+        faq: 'F A Q'
       }
       if (this.language === 'zh') {
         return {
@@ -223,7 +227,8 @@ export default {
           rsvpKidCountPlaceholder: '有多少小孩（12 歲以上）？',
           rsvpNoteLabel: '留言',
           rsvpNotePlaceholder: '需要高腳椅？需要素食？',
-          rsvpSubmit: '確認'
+          rsvpSubmit: '確認',
+          faq: '常見問題'
         }
       }
       if (this.language === 'zh-yue') {
