@@ -4,9 +4,11 @@
       <a :href="`/?guest=${this.guestKey}&language=${language}`" class="icon material-symbols-rounded">arrow_back</a>
       <div class="header-title">F A Q</div>
     </div>
-    <div class="entry" v-for="(entry, iEntry) in this.entries" :key="iEntry">
-      <div class="question">{{ entry.question }}</div>
-      <div class="answer">{{ entry.answer }}</div>
+    <div class="faq">
+      <div class="entry" v-for="(entry, iEntry) in this.entries" :key="iEntry">
+        <div class="question">{{ entry.question }}</div>
+        <div class="answer">{{ entry.answer }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +54,6 @@ export default {
 <style scoped>
 .faq-container {
   --spacing: 8pt;
-  padding: var(--spacing);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -62,17 +63,20 @@ export default {
 .faq-container > .header {
   font-size: 18pt;
   line-height: 36pt;
-  position: relative;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
   height: 36pt;
   max-height: 36pt;
   min-height: 36pt;
-  margin-bottom: 8px;
+  padding: var(--spacing) 0;
+  background-color: rgba(32, 32, 32, 0.75);
 }
 
 .faq-container > .header > .icon {
   position: absolute;
-  left: 4pt;
-  top: 8pt;
+  left: 12pt;
+  top: 16pt;
   color: white !important;
   text-decoration: none !important;
 }
@@ -80,6 +84,11 @@ export default {
 .faq-container > .header > .header-title {
   text-align: center;
   font-family: "Dancing Script", cursive;
+}
+
+.faq {
+  padding: var(--spacing);
+  margin-top: 48pt;
 }
 
 .faq-container .entry {

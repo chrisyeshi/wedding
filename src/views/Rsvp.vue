@@ -172,7 +172,7 @@ export default {
         locationCity: 'Fremond, CA 94555',
         scheduleTitle: 'Schedule',
         scheduleEntryTime: '5:00 PM',
-        scheduleEntryName: 'Entry & Champaign',
+        scheduleEntryName: 'Entry & Champagne',
         scheduleCeremonyTime: '5:30 PM',
         scheduleCeremonyName: 'Ceremony',
         scheduleBarOpenTime: '6:00 PM',

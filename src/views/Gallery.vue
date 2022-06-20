@@ -68,7 +68,6 @@
 <style scoped>
 .gallery-container {
   --spacing: 8pt;
-  padding: var(--spacing);
   display: flex;
   flex-direction: column;
 }
@@ -76,17 +75,20 @@
 .gallery-container > .header {
   font-size: 18pt;
   line-height: 36pt;
-  position: relative;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
   height: 36pt;
   max-height: 36pt;
   min-height: 36pt;
-  margin-bottom: 8px;
+  padding: var(--spacing) 0;
+  background-color: rgba(32, 32, 32, 0.75);
 }
 
 .gallery-container > .header > .icon {
   position: absolute;
-  left: 4pt;
-  top: 8pt;
+  left: 12pt;
+  top: 16pt;
   color: white !important;
   text-decoration: none !important;
 }
@@ -97,7 +99,8 @@
 }
 
 .gallery {
-  --spacing: 8pt;
+  padding: var(--spacing);
+  margin-top: 48pt;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
