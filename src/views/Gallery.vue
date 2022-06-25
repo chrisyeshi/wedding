@@ -83,6 +83,7 @@
   min-height: 36pt;
   padding: var(--spacing) 0;
   background-color: rgba(32, 32, 32, 0.75);
+  color: white !important;
 }
 
 .gallery-container > .header > .icon {
@@ -142,19 +143,11 @@
   .gallery-container {
     color: white;
   }
-
-  .gallery-container > .header > .icon {
-    color: white !important;
-  }
 }
 
 @media (prefers-color-scheme: light) {
   .gallery-container {
     color: #202020;
-  }
-
-  .gallery-container > .header > .icon {
-    color: #202020 !important;
   }
 }
 </style>

@@ -71,6 +71,7 @@ export default {
   min-height: 36pt;
   padding: var(--spacing) 0;
   background-color: rgba(32, 32, 32, 0.75);
+  color: white !important;
 }
 
 .faq-container > .header > .icon {
@@ -92,17 +93,19 @@ export default {
 }
 
 .faq-container .entry {
-  margin-bottom: 36px;
+  margin-bottom: 40px;
 }
 
 .faq-container .question {
   font-size: 16pt;
-  line-height: 36pt;
+  line-height: 24pt;
+  text-decoration: underline;
 }
 
 .faq-container .answer {
   font-size: 14pt;
   line-height: 24pt;
+  margin-top: 12px;
 }
 
 @media (prefers-color-scheme: dark) {

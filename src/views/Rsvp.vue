@@ -60,7 +60,10 @@
     </section>
     <section class="section rsvp" ref="rsvp">
       <form class="rsvp-form" @submit.prevent="onSubmit">
-        <label class="section-title">{{ message.rsvpTitle }}</label>
+        <div class="section-header">
+          <div class="title">{{ message.rsvpTitle }}</div>
+          <div class="subtitle">{{ message.rsvpSubtitle }}</div>
+        </div>
         <label class="label" for="name">{{ message.rsvpNameLabel }}</label>
         <input
           type="text" id="name" name="name"
@@ -184,6 +187,7 @@ export default {
         photoTitle: 'Photos',
         photoMore: 'More',
         rsvpTitle: 'R S V P',
+        rsvpSubtitle: 'Please respond by 08.01',
         rsvpNameLabel: 'Name',
         rsvpNamePlaceholder: 'Your Name',
         rsvpEmailLabel: 'Email',
@@ -192,9 +196,9 @@ export default {
         rsvpAdultCountLabel: 'Adult #',
         rsvpAdultCountPlaceholder: 'How many adults?',
         rsvpKidCountLabel: 'Kid #',
-        rsvpKidCountPlaceholder: 'How many kids (under 12)?',
+        rsvpKidCountPlaceholder: 'Under 12 years old',
         rsvpNoteLabel: 'Notes',
-        rsvpNotePlaceholder: 'Vegan, vegetarian, high chair?',
+        rsvpNotePlaceholder: 'Dietary restrictions, high chair, and things we should know?',
         rsvpSubmit: 'Submit',
         faq: 'F A Q'
       }
@@ -216,6 +220,7 @@ export default {
           photoTitle: '我們的一些照片',
           photoMore: '更多',
           rsvpTitle: '敬請回覆',
+          rsvpSubtitle: '請於 08.01 前回覆',
           rsvpNameLabel: '名字',
           rsvpNamePlaceholder: '您的名字',
           rsvpEmailLabel: '電子郵件',
@@ -226,7 +231,7 @@ export default {
           rsvpKidCountLabel: '小孩數',
           rsvpKidCountPlaceholder: '有多少小孩（12 歲以上）？',
           rsvpNoteLabel: '留言',
-          rsvpNotePlaceholder: '需要高腳椅？需要素食？',
+          rsvpNotePlaceholder: '任何我們需要知道的？',
           rsvpSubmit: '確認',
           faq: '常見問題'
         }
@@ -492,7 +497,7 @@ export default {
   grid-column-start: 1;
   grid-column-end: 3;
   justify-self: center;
-  font-size: 36pt;
+  font-size: 28pt;
 }
 
 .schedule > .info > .time {
@@ -563,7 +568,7 @@ export default {
 }
 
 .rsvp {
-  height: 850px;
+  height: 950px;
   color: white;
   display: flex;
   justify-content: center;
@@ -578,11 +583,22 @@ export default {
   gap: 24px;
 }
 
-.rsvp-form > .section-title {
+.rsvp-form > .section-header {
   grid-column-start: 1;
   grid-column-end: 3;
   justify-self: center;
+}
+
+.rsvp-form > .section-header > .title {
+  font-family: "Dancing Script", cursive;
   font-size: 24pt;
+  text-align: center;
+}
+
+.rsvp-form > .section-header > .subtitle {
+  font-size: 12pt;
+  margin-top: 8px;
+  text-align: center;
 }
 
 .rsvp-form > .label {
@@ -600,6 +616,7 @@ export default {
   grid-column-end: 3;
   justify-self: center;
   color: white !important;
+  font-size: 18pt;
 }
 
 input, textarea {
