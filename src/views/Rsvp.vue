@@ -19,7 +19,7 @@
     </section>
     <section class="section location">
       <div class="map">
-        <img class="ardenwood-image" src="/ardenwood_location.jpg"  @click="onClickMap"/>
+        <img class="yuanshan-image" src="/yuan_shan.webp" @click="onClickMap"/>
         <div class="icon material-symbols-rounded">open_in_new</div>  
       </div>
       <div class="info">
@@ -103,7 +103,7 @@
         <textarea id="notes" name="notes" rows=8
           :placeholder="message.rsvpNotePlaceholder"
           v-model="guestForm.notes"></textarea>
-        <input class="submit" type="submit" :value="message.rsvpSubmit">
+        <input class="submit" type="submit" :value="submitStyle.text" :style="{ 'background-color': submitStyle.backgroundColor }">
         <a class="faq"
           :href="`/faq?guest=${this.guestKey}&language=${this.language}`">
           {{ message.faq }}
@@ -141,7 +141,7 @@ export default {
     },
     language: {
       type: String,
-      default: 'en'
+      default: 'zh'
     }
   },
 
@@ -156,7 +156,8 @@ export default {
         adultCount: '',
         kidCount: '',
         note: ''
-      }
+      },
+      submitStatus: 'default'
     }
   },
 
@@ -200,6 +201,9 @@ export default {
         rsvpNoteLabel: 'Notes',
         rsvpNotePlaceholder: 'Dietary restrictions, high chair, and things we should know?',
         rsvpSubmit: 'Submit',
+        rsvpSubmitting: 'Submitting...',
+        rsvpSubmitted: 'Submitted. Thanks!',
+        rsvpSubmitError: 'Error. Please reach out.',
         faq: 'F A Q'
       }
       if (this.language === 'zh') {
@@ -211,6 +215,9 @@ export default {
           quickLocation: 'Ardenwood Farm, Newark, CA',
           quickRSVP: '請於 08.01 前回覆',
           locationTitle: '地點',
+          locationName: '台北圓山大飯店',
+          locationStreet: '台灣台北市中山區',
+          locationCity: '中山北路四段一號',
           scheduleTitle: '日程',
           scheduleEntryName: '賓客進場 & 享用香檳',
           scheduleCeremonyName: '結婚儀式',
@@ -233,6 +240,9 @@ export default {
           rsvpNoteLabel: '留言',
           rsvpNotePlaceholder: '任何我們需要知道的？',
           rsvpSubmit: '確認',
+          rsvpSubmitting: '上傳中，請稍等',
+          rsvpSubmitted: '已確認，謝謝',
+          rsvpSubmitError: '確認失敗，請電聯',
           faq: '常見問題'
         }
       }
@@ -242,7 +252,22 @@ export default {
         }
       }
       return msg
-    }
+    },
+
+    submitStyle () {
+      if (this.submitStatus === 'default') {
+        return { text: this.message.rsvpSubmit, backgroundColor: '' }
+      }
+      if (this.submitStatus === 'submitting') {
+        return { text: this.message.rsvpSubmitting, backgroundColor: 'Orange' }
+      }
+      if (this.submitStatus === 'submitted') {
+        return { text: this.message.rsvpSubmitted, backgroundColor: '#70c767' }
+      }
+      if (this.submitStatus === 'error') {
+        return { text: this.message.rsvpSubmitError, backgroundColor: 'red' }
+      }
+    },
   },
 
   async created () {
@@ -277,6 +302,7 @@ export default {
     async submit() {
       const appScriptUrl =
           'https://script.google.com/macros/s/AKfycbwh_TzROEPsRF5c5Iwmc1opRbGuAkMs_D9A16WFUt1R1icnbr0NP-EUcpttpLLp0NoJ/exec';
+      this.submitStatus = 'submitting'
       try {
         const res =
             await fetch(
@@ -285,14 +311,15 @@ export default {
         if (!res.ok) {
           throw new Error(res.statusText);
         }
-        alert(`Thank you for your RSVP, ${this.guestForm.name}`);
+        this.submitStatus = 'submitted'
       } catch(error) {
         alert(error);
+        this.submitStatus = 'error'
       }
     },
 
     onClickMap() {
-      let common = 'maps.google.com/maps?q=Ardenwood Historic Farm, Newark, CA';
+      let common = 'goo.gl/maps/91F5ApnozZskAbkR7';
       if ((navigator.platform.indexOf("iPhone") != -1) || 
          (navigator.platform.indexOf("iPad") != -1) || 
          (navigator.platform.indexOf("iPod") != -1))
@@ -443,13 +470,13 @@ export default {
   max-width: 300px;
 }
 
-.location > .map > .ardenwood-image {
+.location > .map > .yuanshan-image {
   width: 100%;
   border-radius: 8px;
 }
 
 .location > .map > .icon {
-  color: dimgray;
+  color: IndianRed;
   position: absolute;
   right: 8px;
   bottom: 12px;

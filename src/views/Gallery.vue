@@ -38,7 +38,7 @@
       },
       language: {
         type: String,
-        default: 'en'
+        default: 'zh'
       }
     },
     data () {
