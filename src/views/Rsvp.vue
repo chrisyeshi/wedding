@@ -31,21 +31,6 @@
         </div>
       </div>
     </section>
-    <section class="section schedule">
-      <div class="info">
-        <div class="section-title">{{ message.scheduleTitle }}</div>
-        <div class="time">{{ message.scheduleEntryTime }}</div>
-        <div>{{ message.scheduleEntryName }}</div>
-        <div class="time">{{ message.scheduleCeremonyTime }}</div>
-        <div>{{ message.scheduleCeremonyName }}</div>
-        <div class="time">{{ message.scheduleBarOpenTime }}</div>
-        <div>{{ message.scheduleBarOpenName }}</div>
-        <div class="time">{{ message.scheduleReceptionTime }}</div>
-        <div>{{ message.scheduleReceptionName }}</div>
-        <div class="time">{{ message.scheduleBarCloseTime }}</div>
-        <div>{{ message.scheduleBarCloseName }}</div>
-      </div>
-    </section>
     <section class="section photos">
       <div class="section-title">{{ message.photoTitle }}</div>
       <div class="photos-container">
@@ -69,11 +54,11 @@
           type="text" id="name" name="name"
           :placeholder="message.rsvpNamePlaceholder"
           v-model="guestForm.name">
-        <label class="label" for="email">{{ message.rsvpEmailLabel }}</label>
-        <input
+        <!-- <label class="label" for="email">{{ message.rsvpEmailLabel }}</label> -->
+        <!-- <input
           type="email" id="email" name="email"
           :placeholder="message.rsvpEmailPlaceholder"
-          v-model="guestForm.email">
+          v-model="guestForm.email"> -->
         <label class="label" for="attend">{{ message.rsvpAttendLabel }}</label>
         <div class="can-toggle">
           <input
@@ -166,14 +151,14 @@ export default {
       let msg = {
         invite: 'Invitation',
         hey: this.guest ? `to ${this.guest.name}` : '',
-        quickWedding: 'Paula & Chris Wedding',
-        quickDate: '09.24.2022 (Sat)',
-        quickLocation: 'Ardenwood Farm, Newark, CA',
-        quickRSVP: 'RSVP by 08.01',
+        quickWedding: 'Paula & Chris',
+        quickDate: '12.24.2022 (Sat)',
+        quickLocation: 'Grand Hotel Taipei',
+        quickRSVP: 'RSVP by 12.01',
         locationTitle: 'Location',
-        locationName: 'Ardenwood Historic Farm',
-        locationStreet: '34600 Ardenwood Blvd.',
-        locationCity: 'Fremond, CA 94555',
+        locationName: 'Grand Hotel Taipei',
+        locationStreet: 'No. 1, Section 4, Zhongshan N Rd',
+        locationCity: 'Zhongshan District， Taipei City',
         scheduleTitle: 'Schedule',
         scheduleEntryTime: '5:00 PM',
         scheduleEntryName: 'Entry & Champagne',
@@ -188,7 +173,7 @@ export default {
         photoTitle: 'Photos',
         photoMore: 'More',
         rsvpTitle: 'R S V P',
-        rsvpSubtitle: 'Please respond by 08.01',
+        rsvpSubtitle: 'Please respond by 12.01',
         rsvpNameLabel: 'Name',
         rsvpNamePlaceholder: 'Your Name',
         rsvpEmailLabel: 'Email',
@@ -209,15 +194,15 @@ export default {
       if (this.language === 'zh') {
         return {
           ...msg,
-          invite: '婚禮請帖',
-          quickWedding: 'Paula & Chris 的婚禮',
-          quickDate: '09.24.2022 (週六)',
-          quickLocation: 'Ardenwood Farm, Newark, CA',
-          quickRSVP: '請於 08.01 前回覆',
-          locationTitle: '地點',
+          invite: '歸寧喜宴',
+          quickWedding: '張寶方 & 葉鬱蔥',
+          quickDate: '民國111年12月24日星期六',
+          quickLocation: '台北圓山大飯店',
+          quickRSVP: '請於 12月1日 前回覆',
+          locationTitle: '時間 & 地點',
           locationName: '台北圓山大飯店',
-          locationStreet: '台灣台北市中山區',
-          locationCity: '中山北路四段一號',
+          locationStreet: '台北市中山區中山北路四段一號',
+          locationCity: '中午十二時 入席',
           scheduleTitle: '日程',
           scheduleEntryName: '賓客進場 & 享用香檳',
           scheduleCeremonyName: '結婚儀式',
@@ -227,7 +212,7 @@ export default {
           photoTitle: '我們的一些照片',
           photoMore: '更多',
           rsvpTitle: '敬請回覆',
-          rsvpSubtitle: '請於 08.01 前回覆',
+          rsvpSubtitle: '請於 12月1日 前回覆',
           rsvpNameLabel: '名字',
           rsvpNamePlaceholder: '您的名字',
           rsvpEmailLabel: '電子郵件',
@@ -238,7 +223,7 @@ export default {
           rsvpKidCountLabel: '小孩數',
           rsvpKidCountPlaceholder: '有多少小孩（12 歲以上）？',
           rsvpNoteLabel: '留言',
-          rsvpNotePlaceholder: '任何我們需要知道的？',
+          rsvpNotePlaceholder: '任何我們需要知道的？特殊餐點需求（例：素食）？',
           rsvpSubmit: '確認',
           rsvpSubmitting: '上傳中，請稍等',
           rsvpSubmitted: '已確認，謝謝',
