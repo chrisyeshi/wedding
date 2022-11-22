@@ -2,7 +2,7 @@
   <div class="container">
     <section class="section invite">
       <div class="background-container">
-        <img class="background-image" src="/236A7258_center_flip.jpg" />
+        <img class="background-image" src="/paulachris_mcp_compressed.jpg" />
       </div>
       <div class="greeting">
         <div class="section-title">{{ message.invite }}</div>
@@ -397,9 +397,8 @@ export default {
   justify-content: center;
   align-items: center;
   line-height: 20pt;
-  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 14px;
-  box-shadow: 0 0 5rem rgb(0 0 0 /100%);
+  text-shadow: 0 0 16px black;
   padding: 8pt;
 }
 
