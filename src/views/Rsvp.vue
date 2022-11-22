@@ -54,11 +54,6 @@
           type="text" id="name" name="name"
           :placeholder="message.rsvpNamePlaceholder"
           v-model="guestForm.name">
-        <!-- <label class="label" for="email">{{ message.rsvpEmailLabel }}</label> -->
-        <!-- <input
-          type="email" id="email" name="email"
-          :placeholder="message.rsvpEmailPlaceholder"
-          v-model="guestForm.email"> -->
         <label class="label" for="attend">{{ message.rsvpAttendLabel }}</label>
         <div class="can-toggle">
           <input
@@ -66,8 +61,9 @@
             v-model="guestForm.attend">
           <label for="attend">
             <div
-              class="can-toggle__switch" data-checked="Yes"
-              data-unchecked="No"></div>
+              class="can-toggle__switch"
+              :data-checked="message.rsvpAttendYes"
+              :data-unchecked="message.rsvpAttendNo"></div>
           </label>
         </div>
         <label class="label" for="adult-count">
@@ -89,10 +85,6 @@
           :placeholder="message.rsvpNotePlaceholder"
           v-model="guestForm.notes"></textarea>
         <input class="submit" type="submit" :value="submitStyle.text" :style="{ 'background-color': submitStyle.backgroundColor }">
-        <a class="faq"
-          :href="`/faq?guest=${this.guestKey}&language=${this.language}`">
-          {{ message.faq }}
-        </a>
       </form>
     </section>
   </div>
@@ -153,10 +145,10 @@ export default {
         hey: this.guest ? `to ${this.guest.name}` : '',
         quickWedding: 'Paula & Chris',
         quickDate: '12.24.2022 (Sat)',
-        quickLocation: 'Grand Hotel Taipei',
+        quickLocation: 'Grand Hotel Taipei, 麒麟宴會廳',
         quickRSVP: 'RSVP by 12.01',
         locationTitle: 'Location',
-        locationName: 'Grand Hotel Taipei',
+        locationName: 'Grand Hotel Taipei, 麒麟宴會廳',
         locationStreet: 'No. 1, Section 4, Zhongshan N Rd',
         locationCity: 'Zhongshan District， Taipei City',
         scheduleTitle: 'Schedule',
@@ -179,6 +171,8 @@ export default {
         rsvpEmailLabel: 'Email',
         rsvpEmailPlaceholder: 'this@that.com',
         rsvpAttendLabel: 'Attend',
+        rsvpAttendYes: 'Yes',
+        rsvpAttendNo: 'No',
         rsvpAdultCountLabel: 'Adult #',
         rsvpAdultCountPlaceholder: 'How many adults?',
         rsvpKidCountLabel: 'Kid #',
@@ -197,10 +191,10 @@ export default {
           invite: '歸寧喜宴',
           quickWedding: '張寶方 & 葉鬱蔥',
           quickDate: '民國111年12月24日星期六',
-          quickLocation: '台北圓山大飯店',
+          quickLocation: '台北圓山大飯店 麒麟宴會廳',
           quickRSVP: '請於 12月1日 前回覆',
           locationTitle: '時間 & 地點',
-          locationName: '台北圓山大飯店',
+          locationName: '台北圓山大飯店 麒麟宴會廳',
           locationStreet: '台北市中山區中山北路四段一號',
           locationCity: '中午十二時 入席',
           scheduleTitle: '日程',
@@ -218,10 +212,12 @@ export default {
           rsvpEmailLabel: '電子郵件',
           rsvpEmailPlaceholder: 'this@that.com',
           rsvpAttendLabel: '是否參加',
+          rsvpAttendYes: '是',
+          rsvpAttendNo: '否',
           rsvpAdultCountLabel: '大人數',
           rsvpAdultCountPlaceholder: '有多少大人？',
           rsvpKidCountLabel: '小孩數',
-          rsvpKidCountPlaceholder: '有多少小孩（12 歲以上）？',
+          rsvpKidCountPlaceholder: '有多少小孩（12 歲以下）？',
           rsvpNoteLabel: '留言',
           rsvpNotePlaceholder: '任何我們需要知道的？特殊餐點需求（例：素食）？',
           rsvpSubmit: '確認',
